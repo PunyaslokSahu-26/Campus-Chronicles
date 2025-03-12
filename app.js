@@ -127,77 +127,74 @@ const questions =
       ]
     }
   ]
-
-const questiontxt = document.querySelector("#ques-text");
-const option1 =document.querySelector("#optn-1");
-const option2 =document.querySelector("#optn-2");
-const option3 =document.querySelector("#optn-3");
-let option1r =document.getElementById(1);
-let option2r =document.getElementById(2);;
-let option3r =document.getElementById(3);;
-const submitbtn =document.querySelector(".btn");
-const quesnum =document.querySelector("#num");
-
-let score,currentquesindex;
-let radiobtns =document.querySelectorAll("input[name='option']");
-currentquesindex=0;
-let checkedindex;
-let dispquesno = 1;
-
-
-startquiz()
-
-
-function startquiz(){
-  score=0;
-  quesnum.innerText = dispquesno;
-  dispquesno++;
-  showquestion1();
-};
-
-function selectedoption() {
-  if(option1r.checked){
-    checkedindex=0;
-  }
-  if(option2r.checked){
-    checkedindex=1;
-  }
-  if(option3r.checked){
-    checkedindex=2;
-  }
-  return checkedindex;
-}
-
-
-function showquestion1(){
-  let currentques = questions[0];
-  questiontxt.innerText =currentques.question;
-  option1.innerText = currentques.choices[0].text;
-  option2.innerText = currentques.choices[1].text;
-  option3.innerText = currentques.choices[2].text;
-};
-
-function shownextques(n) {
-  questiontxt.innerText = questions[n-1].question;
-  option1.innerText = questions[n-1].choices[0].text;
-  option2.innerText = questions[n-1].choices[1].text;
-  option3.innerText = questions[n-1].choices[2].text;
-}
-
-const deselectbox = () =>{
-  option1r.checked=false;
-  option2r.checked=false;
-  option3r.checked=false;
-}
-
-submitbtn.addEventListener('click',() =>{
-  let selectedoptnindex = selectedoption();
-  deselectbox();
-  startquiz();
-  let m=0;
-  score = score +questions[m].choices[selectedoptnindex].score;
-  m=questions[m].choices[selectedoptnindex].nextId;
-  shownextques(m);
-  console.log(m);
-  console.log(score);
-})
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const questiontxt = document.querySelector("#ques-text");
+    const option1 = document.querySelector("#optn-1");
+    const option2 = document.querySelector("#optn-2");
+    const option3 = document.querySelector("#optn-3");
+    const option1r = document.getElementById("option-1");
+    const option2r = document.getElementById("option-2");
+    const option3r = document.getElementById("option-3");
+    const submitbtn = document.querySelector(".btn");
+    const quesnum = document.querySelector("#num");
+  
+    let score = 0;
+    let currentQuestionIndex = 0;
+    let dispquesno = 1;
+  
+    function startQuiz() {
+      score = 0;
+      currentQuestionIndex = 0;
+      dispquesno = 1;
+      showQuestion(currentQuestionIndex);
+    }
+  
+    function selectedOption() {
+      if (option1r && option1r.checked) return 0;
+      if (option2r && option2r.checked) return 1;
+      if (option3r && option3r.checked) return 2;
+      return -1;
+    }
+  
+    function showQuestion(index) {
+      let currentQuestion = questions[index];
+      quesnum.innerText = dispquesno;
+      questiontxt.innerText = currentQuestion.question;
+      option1.innerText = currentQuestion.choices[0].text;
+      option2.innerText = currentQuestion.choices[1].text;
+      option3.innerText = currentQuestion.choices[2].text;
+      deselectOptions();
+    }
+  
+    function deselectOptions() {
+      if (option1r) option1r.checked = false;
+      if (option2r) option2r.checked = false;
+      if (option3r) option3r.checked = false;
+    }
+  
+    submitbtn.addEventListener("click", () => {
+      let selectedOptionIndex = selectedOption();
+      if (selectedOptionIndex === -1) {
+        alert("Please select an option!");
+        return;
+      }
+  
+      let currentQuestion = questions[currentQuestionIndex];
+      let chosenOption = currentQuestion.choices[selectedOptionIndex];
+  
+      score += chosenOption.score;
+      let nextId = chosenOption.nextId;
+  
+      if (nextId === null) {
+        alert(`Quiz Over! Your final score is: ${score}`);
+        startQuiz(); // Restart the quiz
+      } else {
+        currentQuestionIndex = questions.findIndex((q) => q.id === nextId);
+        dispquesno++;
+        showQuestion(currentQuestionIndex);
+      }
+    });
+  
+    startQuiz();
+  });
