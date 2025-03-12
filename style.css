@@ -1,0 +1,96 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.body{
+    background-color: #0A2239;
+}
+.heading{
+    width: 100%;
+    text-align: center;
+    padding-top: 5%;
+    color: #53A2BE;
+
+}
+.bar{
+    background-color: aliceblue;
+    width: 12%;
+    height: 10px;
+    margin-left: 44%;
+    margin-top: 0.5%;
+    border-radius: 20px;
+}
+.game-body{
+    background-color: #53A2BE;
+    height:500px;
+    width: 450px;
+    margin-left: 550px;
+    margin-top: 50px;
+    border-radius: 50px;
+}
+.game-body .ques-no{
+    margin-left: 27px;
+    padding-top: 40px;
+    display: flex;
+
+}
+.game-body .question {
+    margin-top: 25px;
+    padding-left: 25px;
+    font-weight: 800;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #132E32;
+}
+ .game-body .options{
+    margin-top: 10px;
+    
+ }
+ .game-body .options ul{
+    list-style: none;
+ }
+ .game-body .options li{
+    background-color:  #53A2BE;
+    margin-top: 4px;
+    margin-left: 15px;
+    margin-right: 2px;
+    border-radius: 15px;
+ }
+ .game-body .optn{
+    height: 50px;
+    margin-left: 10px;
+    background-color: aliceblue;
+ }
+ .game-body .options label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    font-weight: 550;
+    text-align: center;
+    color: #132E32;
+ }
+ [type="radio"] {
+    width: 20px;
+    height: 20px;
+ }
+ .game-body .submit-btn{
+    padding: 30px 0 0px 180px;
+ }
+ .game-body .btn{
+    height: 40px;
+    width: 90px;
+    background-color: #53A2BE;
+    border-radius: 20px;
+    font-weight: 700;
+    &:hover{
+        background-color: #132E32;
+        color: aliceblue;
+        transition: 0.15s;
+    }
+    &:active{
+        background-color: burlywood;
+        color: aliceblue;
+        transition: 0.15s;
+    }
+ }
+ .hide{
+    display: none;
+ }
