@@ -130,6 +130,7 @@ const questions =
   
   document.addEventListener("DOMContentLoaded", function () {
     const questiontxt = document.querySelector("#ques-text");
+    const gamebody = document.querySelector("game-body");
     const option1 = document.querySelector("#optn-1");
     const option2 = document.querySelector("#optn-2");
     const option3 = document.querySelector("#optn-3");
@@ -185,10 +186,15 @@ const questions =
   
       score += chosenOption.score;
       let nextId = chosenOption.nextId;
+
+      function showscore(){
+        alert(`Quiz Over! Your final score is: ${score}`);
+      }
   
       if (nextId === null) {
-        alert(`Quiz Over! Your final score is: ${score}`);
-        startQuiz(); // Restart the quiz
+      
+        showscore()
+        startQuiz();
       } else {
         currentQuestionIndex = questions.findIndex((q) => q.id === nextId);
         dispquesno++;
